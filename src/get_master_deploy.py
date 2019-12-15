@@ -41,6 +41,7 @@ get_master_pr = {"query": """
               }
               title
               url
+              headRefName
               }
             }
             }
@@ -62,12 +63,29 @@ def post(query):
 
 
 def main():
-    tests = [
-        get_master_pr
-    ]
-    for i, test in enumerate(tests):
-        res = post(test)
-        print('{}'.format(json.dumps(res)))
+    res = post(get_master_pr)
+    # print('{}'.format(json.dumps(res)))
+    for node in res["data"]["search"]["edges"]:
+        repo_name = node["node"]["name"]
+        repo_url = node["node"]["url"]
+        pr_count = 0
+        for pr in node["node"]["pullRequests"]["edges"]:
+            base_ref_name = pr["node"]["baseRefName"]
+            if base_ref_name != "master":
+                continue
+            head_ref_name = pr["node"]["headRefName"]
+            created_at = pr["node"]["createdAt"]
+            if pr["node"]["merged"]:
+                pr_count += 1
+                merged_at = pr["node"]["mergedAt"]
+                merged_by = pr["node"]["mergedBy"]["login"]
+                pr_title = pr["node"]["title"]
+                pr_url = pr["node"]["url"]
+                if pr_count == 1:
+                    print("\n")
+                    print("{repo_name}:  {repo_url}".format(repo_name=repo_name, repo_url=repo_url))
+                print("  #{pr_count} {pr_title} for {head_ref_name} by {merged_by} at {merged_at}".format(pr_count=pr_count, pr_title=pr_title, head_ref_name=head_ref_name, merged_by=merged_by, merged_at=merged_at))
+                print("        {pr_url}".format(pr_url=pr_url))
 
 
 if __name__ == '__main__':
