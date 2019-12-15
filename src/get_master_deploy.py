@@ -8,7 +8,7 @@ from dotenv import load_dotenv
 dotenv_path = join(dirname(__file__), "../.env")
 load_dotenv(dotenv_path)
 
-TOKEN = os.environ.get("TOKEN") # 環境変数の値をAPに代入
+TOKEN = os.environ.get("TOKEN")  # 環境変数の値をAPに代入
 
 # token
 token = TOKEN
@@ -29,28 +29,28 @@ get_master_pr = {"query": """
           name
           url
           pullRequests (first: 100){
-          edges {
-          node {
-          baseRefName
-          createdAt
-          closedAt
-          merged
-          mergedAt
-          mergedBy {
-          login
-          }
-          title
-          url
-          }
-          }
+            edges {
+            node {
+              baseRefName
+              createdAt
+              closedAt
+              merged
+              mergedAt
+              mergedBy {
+                login
+              }
+              title
+              url
+              }
+            }
+            }
           }
         }
-      }
     }
   }
   }
   """
-         }
+                 }
 
 
 def post(query):
