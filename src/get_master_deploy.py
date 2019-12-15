@@ -27,7 +27,6 @@ get_master_pr = {"query": """
       node {
         ... on Repository {
           name
-          diskUsage
           url
           pullRequests (first: 100){
           edges {
