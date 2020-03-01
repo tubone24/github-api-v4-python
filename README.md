@@ -33,7 +33,7 @@ If you use Hosted GitHub Enterprise, Change ENDPOINT to yours.
 ## How to use
 
 ```
-
+python get_master_deploy.py 
 ```
 
 
