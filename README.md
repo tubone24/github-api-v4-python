@@ -15,9 +15,25 @@ pip install -r requirements.txt
 ```
 
 
-Set environments.
+Create environments file(dot env). 
 
 ```
+touch .env
+```
+
+Set the GitHub API Tokens to `.env`.
+
+```
+TOKEN=YourGitHubToken
+ENDPOINT=https://api.github.com/graphql
+```
+
+If you use Hosted GitHub Enterprise, Change ENDPOINT to yours.
+
+## How to use
+
+```
+
 ```
 
 
